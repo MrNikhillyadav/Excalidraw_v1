@@ -3,8 +3,8 @@
 import { useSocket } from "@/hooks/useSocket"
 import { useEffect, useState } from "react"
 
-export function ChatRoomClient({id,messages}:{
-    id : string,
+export function  ChatRoomClient({id,messages}:{
+    id : number,
     messages : {message : string}[]
 }){
     const {socket, loading} = useSocket()
