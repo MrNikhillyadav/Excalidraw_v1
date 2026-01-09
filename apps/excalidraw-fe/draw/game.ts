@@ -26,10 +26,10 @@ export async function initDraw(canvas:HTMLCanvasElement, roomId:string, socket:W
             if(message.type == "chat")
                 var parsedShape = JSON.parse(message.message);
                 existingShapes.push(parsedShape.shape)
-                clearCanvas(existingShapes,canvas,ctx);
+                renderCanvas(existingShapes,canvas,ctx);  // rendering like react do.
         }
             
-        clearCanvas(existingShapes,canvas,ctx);
+        renderCanvas(existingShapes,canvas,ctx);
         let startX = 0;
         let  startY = 0;
         let clicked = false;
@@ -69,7 +69,7 @@ export async function initDraw(canvas:HTMLCanvasElement, roomId:string, socket:W
                 const width = e.clientX - startX;
                 const height = e.clientY - startY;
         
-                clearCanvas(existingShapes,canvas,ctx);
+                renderCanvas(existingShapes,canvas,ctx);
                 
                 ctx.strokeStyle = "rgba(255,255,255)"
                 ctx.strokeRect(startX, startY, width,height)
@@ -90,15 +90,15 @@ async function getExistingShapes(roomId:string){
     return shapes;
 }
 
-async function clearCanvas(existingShapes:Shape[], canvas: HTMLCanvasElement,ctx: CanvasRenderingContext2D){
+async function renderCanvas(existingShapes:Shape[], canvas: HTMLCanvasElement,ctx: CanvasRenderingContext2D){
     ctx.clearRect(0,0, canvas.width, canvas.height);
     ctx.fillRect(0,0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(0,0,0)';
 
     existingShapes.map((shape) => {
         if(shape.type == "rect"){
-            ctx.strokeStyle = 'rgba(255,255,255)';
-            ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
+            ctx.strokeStyle = 'rgba(255,255,255)'; // white
+            ctx.strokeRect(shape.x, shape.y, shape.width, shape.height); // dimensions
         }
     })
 

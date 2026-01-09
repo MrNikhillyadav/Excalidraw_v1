@@ -1,6 +1,5 @@
 
-import initDraw from "@/draw/game";
-import { Socket } from "dgram";
+import {initDraw} from "@/draw/game";
 import { useEffect, useRef } from "react"
 
 export default function Canvas({roomId, socket}: {
@@ -11,7 +10,6 @@ export default function Canvas({roomId, socket}: {
 
     useEffect(() => {
        const canvas = canvasRef.current;
-
        if(canvasRef.current){
            initDraw(canvasRef.current,roomId,socket); 
        }
